@@ -1,14 +1,14 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: sans-serif;
+  --font-sans: Inter, sans-serif;
 
   --color-purple: #6E40D7; 
 }
 
 html,
 body {
-  @apply bg-white;
+  @apply bg-white text-gray-600;
 
   @media (prefers-color-scheme: light) {
     color-scheme: light;

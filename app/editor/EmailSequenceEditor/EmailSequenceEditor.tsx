@@ -2,6 +2,9 @@ import clsx from 'clsx';
 import React from 'react';
 import type { FC } from 'react';
 import Stepper from '~/components/layout/Stepper/Stepper';
+import EmailSequenceEditStep from './EmailSequenceEditStep';
+import EmailSequenceSummaryStep from './EmailSequenceSummaryStep';
+import EmailSequenceCreateStep from './EmailSequenceCreateStep';
 
 interface EmailSequenceEditorProps {
   className?: string,
@@ -18,7 +21,11 @@ const EmailSequenceEditor: FC<EmailSequenceEditorProps> = ({
       className={ emailSequenceClassNames }
     >
       EmailSequenceEditor component
-      <Stepper />
+      <Stepper>
+        <EmailSequenceCreateStep />
+        <EmailSequenceEditStep />
+        <EmailSequenceSummaryStep />
+      </Stepper>
     </div>
   );
 };

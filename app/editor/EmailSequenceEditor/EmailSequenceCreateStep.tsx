@@ -1,11 +1,11 @@
 import React from 'react';
 import type { FC } from 'react';
 
-interface EmailSequenceStepProps {
+interface EmailSequenceCreateStepProps {
   className?: string,
 }
 
-const EmailSequenceStep: FC<EmailSequenceStepProps> = ({
+const EmailSequenceCreateStep: FC<EmailSequenceCreateStepProps> = ({
   className = '',
 }) => {
 
@@ -13,11 +13,11 @@ const EmailSequenceStep: FC<EmailSequenceStepProps> = ({
     <div
       className={ className }
     >
-      EmailSequenceStep component
+      EmailSequenceCreateStep component
     </div>
   );
 };
 
-export default EmailSequenceStep;
+export default EmailSequenceCreateStep;
 
-export type { EmailSequenceStepProps };
+export type { EmailSequenceCreateStepProps };

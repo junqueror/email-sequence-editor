@@ -1,17 +1,16 @@
-import type { Route } from "./+types/home";
-import { Welcome } from "../welcome/welcome";
+import React from "react";
+import Welcome from "../home/welcome";
 
-export function meta({}: Route.MetaArgs) {
-  return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
-  ];
+const TITLE = "Email Sequence Editor";
+const DESCRIPTION = "Exercise interview for a Senior Frontend position at Salesforge "
+
+export const meta = () => [
+    { title: TITLE },
+    { name: "description", content: DESCRIPTION },
+];
+
+const Home = () => {
+  return <Welcome title={ TITLE } />;
 }
 
-export function loader({ context }: Route.LoaderArgs) {
-  return { message: "Hello from Vercel" };
-}
-
-export default function Home({ loaderData }: Route.ComponentProps) {
-  return <Welcome message={loaderData.message} />;
-}
+export default Home;

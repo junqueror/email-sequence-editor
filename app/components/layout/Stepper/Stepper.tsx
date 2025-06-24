@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import StepperController from './StepperController';
 import type { Step } from './StepperController';
 import clsx from 'clsx';
+import Divider from '../Divider';
 
 interface StepperProps {
   steps: Step[];
@@ -39,7 +40,8 @@ const Stepper: FC<StepperProps> = ({
         onStepChange= { handleStepChange }
         steps={ steps }
       />
-      <div className='w-full'>
+      <Divider />
+      <div className='w-full my-4'>
         { steps[step].node }
       </div>
     </div>

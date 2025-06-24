@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import React from 'react';
 import type { FC } from 'react';
 
@@ -7,16 +8,14 @@ interface NewEmailSequenceCreateStepProps {
 
 const NewEmailSequenceCreateStep: FC<NewEmailSequenceCreateStepProps> = ({
   className = '',
-}) => {
-
-  return (
-    <div
-      className={ className }
-    >
-      NewEmailSequenceCreateStep component
-    </div>
-  );
-};
+}) => (
+  <div
+    className={ className }
+  >
+    { /* TODO: Complete create step of NewEmailSequuence component */}
+    <span>NewEmailSequenceCreateStep component</span>
+  </div>
+);
 
 export default NewEmailSequenceCreateStep;
 

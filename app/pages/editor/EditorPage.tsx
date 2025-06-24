@@ -1,6 +1,6 @@
 import React from "react";
 import siteConfig from "../../config/site";
-import NewEmailSequence from "~/pages/editor/NewEmailSequence/NewEmailSequence";
+import NewEmailSequence from "~/pages/editor/NewEmailSequence";
 import BreadCrumbs from "~/components/layout/BreadCrumbs";
 import SendIcon from '~/assets/icons/Send.svg?react';
 

@@ -23,6 +23,8 @@ const StepperController: FC<StepperControllerProps> = ({
   onStepChange,
   className = '',
 }) => {
+  const currentStep = steps[step];
+
   const handlePrevClick = () => onStepChange(step - 1);
   const handleNextClick = () => onStepChange(step + 1);
 
@@ -99,21 +101,28 @@ const StepperController: FC<StepperControllerProps> = ({
           })}
         </div>
       </div>
-      {/* Stepper Buttons */}
-      <div className='flex gap-4 justify-end my-4'>
-        <Button 
-          isDisabled={ step <= 0 }
-          onClick={ handlePrevClick }
-        >
-          Previous
-        </Button>
-        <Button
-          isAccent
-          isDisabled={ step >= steps.length - 1}
-          onClick={ handleNextClick }
-        >
-          Next
-        </Button>
+        <div className='flex gap-4 justify-between items-start my-4'>
+        {/* Step info */}
+        <div>
+          <span className='block text-gray-700 text-lg font-semibold'>{ currentStep.label }</span>
+          { !!currentStep.description && <span className='block size-sm'>{ currentStep.description }</span> }
+        </div>
+        {/* Stepper Buttons */}
+        <div className='flex gap-4 justify-end'>
+          <Button 
+            isDisabled={ step <= 0 }
+            onClick={ handlePrevClick }
+          >
+            Previous
+          </Button>
+          <Button
+            isAccent
+            isDisabled={ step >= steps.length - 1}
+            onClick={ handleNextClick }
+          >
+            Next
+          </Button>
+        </div>
       </div>
     </div>
   );

@@ -20,10 +20,10 @@ const BreadCrumbs: FC<BreadCrumbsProps> = ({
       className={ breadCrumbsClassNames }
     >
       { childrenArray.map((child, idx) => (
-        <>
+        <div className="flex gap-4" key={ `breadcrumb-${idx}`} >
           { (idx >= 1) && <span className='text-gray-200'>{ ">" }</span> }
           { child }
-        </>
+        </div>
       )) }
     </div>
   );

@@ -7,7 +7,7 @@ interface ButtonProps {
   className?: string,
   isAccent?: boolean,
   isDisabled?: boolean,
-  onClick: () => void,
+  onClick?: () => void,
 }
 
 const Button: FC<ButtonProps> = ({
@@ -15,10 +15,10 @@ const Button: FC<ButtonProps> = ({
   children,
   isAccent = false,
   isDisabled = false,
-  onClick,
+  onClick = () => {},
 }) => {
-  const buttonClassNames = clsx("border border-gray-300 rounded-xl px-4 py-[10px] text-gray-700 font-semibold h-fit w-fit", {
-    "bg-purple border-0 text-white": isAccent,
+  const buttonClassNames = clsx("border border-gray-300 rounded-lg px-3 py-2 text-gray-700 font-semibold h-fit w-fit", {
+    "bg-primary border-0 text-white": isAccent,
     "cursor-pointer": !isDisabled,
     "cursor-not-allowed": isDisabled,
   },

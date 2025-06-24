@@ -3,14 +3,19 @@
 @theme {
   --font-sans: Inter, sans-serif;
 
-  --color-purple: #6E40D7; 
+  --color-primary: #6e40d7;
 }
 
 html,
 body {
   @apply bg-white text-gray-600;
+  font-size: 14px; /* Set reference for rem units, adjusted to Figma designs */
 
   @media (prefers-color-scheme: light) {
     color-scheme: light;
   }
+}
+
+h1 {
+  @apply text-3xl text-gray-900 font-semibold leading-11;
 }

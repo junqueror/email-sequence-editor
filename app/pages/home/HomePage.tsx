@@ -1,5 +1,5 @@
 import React from "react";
-import Welcome from "../home/welcome";
+import Welcome from "./Welcome";
 
 const TITLE = "Email Sequence Editor";
 const DESCRIPTION = "Exercise interview for a Senior Frontend position at Salesforge "
@@ -9,8 +9,8 @@ export const meta = () => [
     { name: "description", content: DESCRIPTION },
 ];
 
-const Home = () => {
+const HomePage = () => {
   return <Welcome title={ TITLE } />;
 }
 
-export default Home;
+export default HomePage;

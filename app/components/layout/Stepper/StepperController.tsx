@@ -32,7 +32,7 @@ const StepperController: FC<StepperControllerProps> = ({
     <div className={className}>
       {/* Progress Bar */}
       <div className="w-full flex flex-col items-center mb-8">
-        <div className="flex w-full items-center justify-between px-2">
+        <div className="flex w-full items-start justify-between px-2">
           {steps.map((_step, idx) => {
             const isPrevStep = idx < step;
             const isCurrentStep = idx === step;
@@ -82,7 +82,7 @@ const StepperController: FC<StepperControllerProps> = ({
                   </div>
                 </div>
                 {/* Label & Description */}
-                <div className="mt-4 text-center">
+                <div className='mt-4 text-center hidden sm:block'>
                   <span className={ clsx('block text-base font-semibold', {
                     'text-primary': isCurrentStep,
                   } ) }>

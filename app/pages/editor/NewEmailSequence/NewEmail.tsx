@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense, useState } from 'react';
 import type { FC } from 'react';
 import Divider from '~/components/layout/Divider';
 import Mail from '~/assets/icons/Mail.svg?react';
@@ -21,10 +21,19 @@ const NewEmail: FC<NewEmailProps> = ({
   className = '',
   onEditEmail = undefined,
 }) => {
-  const newEmailClassNames = clsx('border border-gray-200 rounded-xl', className);
+  const [smdeAutofocus, setSmdeAutofocus] = useState(false);
+  
+  const editSubject = (event: React.ChangeEvent<HTMLInputElement >) => {
+    setSmdeAutofocus(false);
+    onEditEmail?.({ id: email.id, subject: event?.target?.value });
+  };
 
-  const editSubject = (event: React.ChangeEvent<HTMLInputElement >) => onEditEmail?.({ id: email.id, subject: event?.target?.value });
-  const editContent = (value: string) => onEditEmail?.({ id: email.id, content: value });
+  const editContent = (value: string) => {
+    setSmdeAutofocus(true);
+    onEditEmail?.({ id: email.id, content: value });
+  };
+
+  const newEmailClassNames = clsx('border border-gray-200 rounded-xl', className);
 
   return (
     <div className={ newEmailClassNames }>
@@ -38,23 +47,26 @@ const NewEmail: FC<NewEmailProps> = ({
       <input 
         className='mx-6 w-full outline-none text-lg' 
         type='text' 
+        name="subject"
         placeholder='Subject' 
         value={ email.subject }
         onChange={ editSubject }
       />
       <Divider />
-      <div className='mx-2 my-1 min-h-32'>
+      <div className='mx-2 my-1'>
         <Suspense fallback={null}>
           <SimpleMDEEditor
           className={ clsx(
             '[&>.EasyMDEContainer]:!border-0', // wrapper
-            '[&>.EasyMDEContainer>.CodeMirror]:!border-0', // CodeMirror
+            '[&>.EasyMDEContainer>.CodeMirror]:!border-0', // CodeMirror // FIXME: CodeMirror from SimpleMDEEditor doesn't allow to remove min height => Change by another Markdown editor?
+            '[&>.EasyMDEContainer>.editor-preview-side]:!hidden', // preview
             '[&>.EasyMDEContainer>.editor-toolbar]:!border-0 [&>.EasyMDEContainer>.editor-toolbar_i]:text-gray-400 [&>.EasyMDEContainer>.editor-toolbar_button:after]:text-gray-400', // toolbar
             '[&>.EasyMDEContainer>.editor-statusbar]:hidden', // statusbar
           ) }
             value={ email.content }
             onChange={ editContent }
             options={ {
+              autofocus: smdeAutofocus,
               toolbar: ['bold', 'italic', 'heading-bigger', 'heading-smaller', 'quote', 'link', 'image', 'unordered-list', 'ordered-list'],
             } }
           />

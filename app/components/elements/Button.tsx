@@ -17,10 +17,13 @@ const Button: FC<ButtonProps> = ({
   isDisabled = false,
   onClick = () => {},
 }) => {
-  const buttonClassNames = clsx("border border-gray-300 rounded-lg px-3 py-2 text-gray-700 font-semibold h-fit w-fit", {
-    "bg-primary border-0 text-white": isAccent,
+  const buttonClassNames = clsx("border border-gray-300 rounded-lg px-3 py-2 font-semibold h-fit w-fit", {
     "cursor-pointer": !isDisabled,
     "cursor-not-allowed": isDisabled,
+    "text-gray-700": !isDisabled && !isAccent,
+    "bg-primary border-0 text-white": !isDisabled && isAccent,
+    "text-gray-300": isDisabled && !isAccent,
+    "bg-gray-300 text-white": isDisabled && isAccent,
   },
   className);
 

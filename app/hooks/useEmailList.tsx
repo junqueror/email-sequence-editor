@@ -20,6 +20,9 @@ type EmailsAction = {
 
 type Action = EmailAction | EmailsAction;
 
+// NOTE: I do not use useReducer quite often, only when necessary.
+// But just in this case it is justified and better option that useState
+// The email list depends on the previous state and can be modified by several different operations. Plus, It also makes it possible to separate this responsibility in a custom hook
 const emailReducer = (state: Email[], action: Action): Email[] => {
   switch (action.type) {
     case ActionTypes.ADD_EMAIL:

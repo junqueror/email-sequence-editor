@@ -5,10 +5,5 @@ import tsconfigPaths from "vite-tsconfig-paths";
 import svgr from "vite-plugin-svgr";
 
 export default defineConfig({
-  plugins: [
-    tailwindcss(), 
-    svgr(),
-    reactRouter(), 
-    tsconfigPaths(),
-  ],
+  plugins: [tailwindcss(), svgr(), reactRouter(), tsconfigPaths()],
 });

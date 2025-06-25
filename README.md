@@ -1,16 +1,6 @@
-# Welcome to React Router!
+# Welcome to React Email Sequence Editor
 
-A modern, production-ready template for building full-stack React applications using React Router.
-
-## Features
-
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+Simple sequence editor for generating email sequence steps
 
 ## Getting Started
 
@@ -40,14 +30,37 @@ Create a production build:
 npm run build
 ```
 
+## App code structure
+
+```
+app/
+│
+├── app.css           # Global styles for the application (Tailwind CSS config)
+├── root.tsx          # Main app entry/root component (often sets up providers, layout, etc.)
+├── routes.ts         # Route definitions for the app
+│
+├── assets/           # Static assets (images, SVGs, fonts) imported in code
+│
+├── components/       # Reusable UI components
+│   ├── elements/     # Basic UI elements
+│   ├── layout/       # Layout-related components
+│
+├── config/           # App configuration
+│
+├── hooks/            # Custom React hooks (data fetching, reusable logic, isolated logic)
+│   ├── api/          # Hooks for API calls
+│
+├── pages/            # Top-level pages/views (routed screens)
+│   ├── home/         # Home page and components
+│   ├── editor/       # Email sequence editor and components
+│
+├── services/         # Business logic and API service modules
+│   ├── api/          # API service implementations
+│
+├── types/            # TypeScript type definitions (domain). Used across all the app
+│
+```
+
 ## Deployment
 
-[![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fremix-run%2Freact-router-templates%2Ftree%2Fmain%2Fvercel&project-name=my-react-router-app&repository-name=my-react-router-app)
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
-
----
-
-Built with ❤️ using React Router.
+[email-sequence-editor.vercel.app](https://email-sequence-editor.vercel.app/)

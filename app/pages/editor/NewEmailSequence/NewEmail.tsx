@@ -78,9 +78,9 @@ const NewEmail: FC<NewEmailProps> = ({
           <Divider />
           <div className="mx-2 my-1">
             <Suspense fallback={null}>
-              {/* This MD editor does not work well, it has some focus related problems 
+              {/* NOTE: This MD editor does not work well, it has some focus related problems 
                   I decided to open/close mails to have only one MD editor present at a time 
-                  In case I have more time, I will look for a more consistent replacement from another library 
+                  TODO: When there is more time, I would look for a more consistent replacement from another library 
               */}
               <SimpleMDEEditor
                 className={clsx(

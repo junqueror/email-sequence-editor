@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 import type { FC } from 'react';
 import StepperController from './StepperController';
 import type { Step } from './StepperController';
@@ -6,8 +6,9 @@ import clsx from 'clsx';
 import Divider from '../Divider';
 
 interface StepperProps {
+  step: number,
   steps: Step[];
-  initialStep?: number,
+  onStepChange: (step: number) => void,
   className?: string,
 }
 
@@ -17,16 +18,15 @@ interface StepperProps {
 // In case of a tight deadline, this can be implemented faster with only the required functionality.
 
 const Stepper: FC<StepperProps> = ({
+  step,
   steps,
-  initialStep = 0,
+  onStepChange,
   className = '',
 }) => {
-  const [step, useStep] = useState<number>(initialStep);
-
   const maxSteps = steps.length;
 
   const handleStepChange = useCallback((newStep: number) => {
-    useStep(Math.max(0, Math.min(newStep, maxSteps - 1)));
+    onStepChange(Math.max(0, Math.min(newStep, maxSteps - 1)));
   }, [maxSteps]);
 
   const stepperClassNames = clsx("w-full", className);

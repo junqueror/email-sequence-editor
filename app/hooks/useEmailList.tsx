@@ -1,20 +1,28 @@
 import { useReducer } from "react";
 import type { Email } from "~/types/email";
 
-enum Actions {
+enum ActionTypes {
     ADD_EMAIL = 'ADD_EMAIL',
     EDIT_EMAIL = 'EDIT_EMAIL',
     DELETE_EMAIL = 'DELETE_EMAIL',
+    SET_EMAILS = 'SET_EMAILS',
 }
 
 type EmailAction = {
-    type: Actions; 
-    payload: Partial<Email>
+    type: ActionTypes; 
+    payload: Partial<Email>,
 };
 
-function emailReducer(state: Email[], action: EmailAction): Email[] {
+type EmailsAction = {
+  type: ActionTypes.SET_EMAILS; 
+  payload: Email[],
+};
+
+type Action = EmailAction | EmailsAction;
+
+const emailReducer = (state: Email[], action: Action): Email[] => {
   switch (action.type) {
-    case Actions.ADD_EMAIL:
+    case ActionTypes.ADD_EMAIL:
       return [
         ...state,
         {
@@ -23,15 +31,18 @@ function emailReducer(state: Email[], action: EmailAction): Email[] {
         }
       ];
     
-    case Actions.EDIT_EMAIL:
+    case ActionTypes.EDIT_EMAIL:
       return state.map(email => 
-        email.id === action.payload.id 
+        email.id === action.payload.id
           ? { ...email, ...action.payload }
           : email
       );
     
-    case Actions.DELETE_EMAIL:
+    case ActionTypes.DELETE_EMAIL:
       return state.filter(email => email.id !== action.payload.id);
+    
+    case ActionTypes.SET_EMAILS:
+      return [];
     
     default:
       return state;
@@ -42,22 +53,28 @@ const useEmailList = (initialEmails: Email[] = []) => {
   const [emails, dispatch] = useReducer(emailReducer, initialEmails);
 
   const addEmail = (emailData: Omit<Email, 'id'>) => {
-    dispatch({ type: Actions.ADD_EMAIL, payload: emailData });
+    dispatch({ type: ActionTypes.ADD_EMAIL, payload: emailData });
   };
 
   const editEmail = (emailData: Email) => {
-    dispatch({ type: Actions.EDIT_EMAIL, payload: emailData });
+    dispatch({ type: ActionTypes.EDIT_EMAIL, payload: emailData });
   };
 
   const deleteEmail = (id: string) => {
-    dispatch({ type: Actions.DELETE_EMAIL, payload: { id } });
+    dispatch({ type: ActionTypes.DELETE_EMAIL, payload: { id } });
   };
+
+  const setEmails = (emails: Email[]) => {
+    dispatch({ type: ActionTypes.SET_EMAILS, payload: emails });
+  };
+
 
   return {
     emails,
     addEmail,
     editEmail,
     deleteEmail,
+    setEmails,
   };
 }
 

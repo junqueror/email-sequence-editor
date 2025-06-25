@@ -23,13 +23,7 @@ type Action = EmailAction | EmailsAction;
 const emailReducer = (state: Email[], action: Action): Email[] => {
   switch (action.type) {
     case ActionTypes.ADD_EMAIL:
-      return [
-        ...state,
-        {
-          id: crypto.randomUUID(),
-          ...action.payload,
-        },
-      ];
+      return [...state, action.payload as Email];
 
     case ActionTypes.EDIT_EMAIL:
       return state.map((email) =>
@@ -49,11 +43,14 @@ const emailReducer = (state: Email[], action: Action): Email[] => {
   }
 };
 
+// Hook to manage an email list through a reducer
 const useEmailList = (initialEmails: Email[] = []) => {
   const [emails, dispatch] = useReducer(emailReducer, initialEmails);
 
   const addEmail = (emailData: Omit<Email, "id">) => {
-    dispatch({ type: ActionTypes.ADD_EMAIL, payload: emailData });
+    const newEmail = { id: crypto.randomUUID(), ...emailData };
+    dispatch({ type: ActionTypes.ADD_EMAIL, payload: newEmail });
+    return newEmail.id;
   };
 
   const editEmail = (emailData: Email) => {

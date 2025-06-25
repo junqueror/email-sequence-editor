@@ -1,6 +1,7 @@
 import apiConfig from "~/config/api";
 import type { EmailSequence } from "~/types/email";
 
+// Service for peforming API operations related with email sequences
 class EmailSequenceApiService {
   getEmailSquences = async () => {
     const response = await fetch(apiConfig.ENPOINTS.EMAIL_SEQUENCES, {

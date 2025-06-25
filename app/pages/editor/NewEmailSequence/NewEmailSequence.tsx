@@ -8,8 +8,16 @@ import NewEmailSequenceCreateStep from "./NewEmailSequenceCreateStep";
 import type { Step } from "~/components/layout/Stepper/StepperController";
 import useEmailList from "~/hooks/useEmailList";
 import useApiEmailSequences from "~/hooks/api/useApiEmailSequences";
+import type { Email } from "~/types/email";
 
 const INITIAL_STEP = 1;
+const INITIAL_EMAIL = {
+  id: "initial-email",
+  title: "Initial email",
+};
+const FOLLOW_UP_EMAIL = {
+  title: "Follow-up email",
+};
 const DEFAULT_EMAIL_SEQUENCE_NAME = "Email Sequence";
 const DEFAULT_EMAIL_SEQUENCE_PRODUCT = "Interview";
 
@@ -19,12 +27,18 @@ interface NewEmailSequenceProps {
 
 const NewEmailSequence: FC<NewEmailSequenceProps> = ({ className = "" }) => {
   const [step, setStep] = useState<number>(INITIAL_STEP);
-  const { emails, addEmail, editEmail, setEmails } = useEmailList();
+  const [openEmailId, setOpenEmailId] = useState<Email["id"] | undefined>(
+    INITIAL_EMAIL.id,
+  );
+
+  const { emails, addEmail, editEmail, setEmails } = useEmailList([
+    INITIAL_EMAIL,
+  ]);
   const { createEmailSequence } = useApiEmailSequences({
     // TODO: Update response/error handling to give user feedback with toast notifications or similar
     onCreateSuccess: () => {
       // Clean email sequence and return to editor step
-      setEmails([]);
+      setEmails([INITIAL_EMAIL]);
       setStep(INITIAL_STEP);
     },
     onCreateError: console.error,
@@ -35,10 +49,11 @@ const NewEmailSequence: FC<NewEmailSequenceProps> = ({ className = "" }) => {
   const handleAddNewEmail = useCallback(() => {
     const isFirstEmail = !emails.length;
     const title = isFirstEmail
-      ? "Initial email"
-      : `Follow-up email ${emails.length}`;
+      ? INITIAL_EMAIL.title
+      : `${FOLLOW_UP_EMAIL.title} ${emails.length}`;
 
-    addEmail({ title });
+    const newId = addEmail({ title });
+    setOpenEmailId(newId);
   }, [emails]);
 
   const handleSave = useCallback(
@@ -64,8 +79,10 @@ const NewEmailSequence: FC<NewEmailSequenceProps> = ({ className = "" }) => {
         node: (
           <NewEmailSequenceEditStep
             emails={emails}
+            openEmailId={openEmailId}
             onAddNewEmail={handleAddNewEmail}
             onEditEmail={editEmail}
+            onClickEmail={setOpenEmailId}
           />
         ),
       },
@@ -77,7 +94,7 @@ const NewEmailSequence: FC<NewEmailSequenceProps> = ({ className = "" }) => {
         ),
       },
     ],
-    [emails],
+    [emails, handleAddNewEmail, editEmail, setOpenEmailId],
   );
 
   return (

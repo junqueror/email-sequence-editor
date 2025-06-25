@@ -7,6 +7,8 @@ import clsx from "clsx";
 
 interface NewEmailSequenceEditStepProps {
   emails?: Email[];
+  openEmailId?: Email["id"];
+  onClickEmail: (id: Email["id"]) => void;
   onAddNewEmail?: () => void;
   onEditEmail?: ({
     id,
@@ -22,7 +24,9 @@ interface NewEmailSequenceEditStepProps {
 
 const NewEmailSequenceEditStep: FC<NewEmailSequenceEditStepProps> = ({
   emails = [],
+  openEmailId = undefined,
   className = "",
+  onClickEmail = undefined,
   onAddNewEmail = undefined,
   onEditEmail = undefined,
 }) => {
@@ -32,7 +36,13 @@ const NewEmailSequenceEditStep: FC<NewEmailSequenceEditStepProps> = ({
     <div className={newEmailSequenceEditStepClassNames}>
       <div className="flex flex-col gap-4">
         {emails.map((email) => (
-          <NewEmail email={email} key={email.title} onEditEmail={onEditEmail} />
+          <NewEmail
+            key={email.title}
+            email={email}
+            isOpen={openEmailId === email.id}
+            onEditEmail={onEditEmail}
+            onClick={onClickEmail}
+          />
         ))}
       </div>
       {!!onAddNewEmail && (

@@ -8,6 +8,7 @@ interface UseApiEmailSequencesProps {
   onCreateError?: (error?: Error) => void;
 }
 
+// Hook to manage email sequence operations by using an API service
 const useApiEmailSequences = (
   { onCreateSuccess, onCreateError }: UseApiEmailSequencesProps = {
     onCreateSuccess: () => {},

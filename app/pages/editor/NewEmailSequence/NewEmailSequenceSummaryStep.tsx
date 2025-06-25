@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import React from 'react';
 import type { FC } from 'react';
 import type { Email } from '~/types/email';
@@ -11,11 +12,30 @@ const NewEmailSequenceSummaryStep: FC<NewEmailSequenceSummaryStepProps> = ({
   emails = [],
   className = '',
 }) => {
+ const newEmailSequenceSummaryStepClassNames = clsx('flex gap-4 flex-col sm:flex-row', className);
+
   return (
     <div
-      className={ className }
+      className={ newEmailSequenceSummaryStepClassNames }
     >
-      { emails.map(email => <div key={ email.subject }>{ email.subject }</div>)}
+      <div className='min-w-[280px]'>
+        <span className="text-gray-700 font-semibold">Sequence steps and details</span>
+      </div>
+      <div className='flex flex-col gap-8'>
+      { emails.map(email => <div key={ email.subject }>
+          <div className='text-gray-700 font-semibold'>
+            <span>{ email.title }</span>
+          </div>
+          <div>
+            <span>Subject: </span>
+            <span>{ email.subject || '-'}</span>
+          </div>
+          <div className='flex flex-row items-start mt-4 gap-1'>
+            <span>Content:</span>
+            <p className='whitespace-pre-wrap'>{ email.content || '-'}</p>
+          </div>
+      </div>)}
+      </div>
     </div>
   );
 };

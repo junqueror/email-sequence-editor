@@ -4,6 +4,10 @@
   --font-sans: Inter, sans-serif;
 
   --color-primary: #6e40d7;
+  --color-gray-500: #667085;
+  --color-gray-600: #475467;
+  --color-gray-700: #344054;
+  --color-gray-900: #101828;
 }
 
 html,

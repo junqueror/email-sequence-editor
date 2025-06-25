@@ -32,8 +32,11 @@ const StepperController: FC<StepperControllerProps> = ({
     <div className={className}>
       {/* Progress Bar */}
       <div className="w-full flex flex-col items-center mb-8">
-        <div className="flex w-full items-start justify-between px-2">
+        <div className="flex w-full items-start px-2">
           {steps.map((_step, idx) => {
+            const isFirstStep = idx === 0;
+            const isLastStep = idx === steps.length - 1;
+            const isEdgeStep = isFirstStep || isLastStep;
             const isPrevStep = idx < step;
             const isCurrentStep = idx === step;
             const isPrevOrCurrentStep = isPrevStep || isCurrentStep;
@@ -41,9 +44,10 @@ const StepperController: FC<StepperControllerProps> = ({
             const isNextOrCurrentStep = isNextStep || isCurrentStep;
                         
             return (
-              <div key={_step.label} className={ clsx("flex-1 flex flex-col items-center relative", {
-
-              }) }>
+              <div key={_step.label} className={ clsx("flex flex-col items-center relative", {
+                  'flex-1': isEdgeStep,
+                  'flex-2': !isEdgeStep,
+              } ) }>
                 {/* Left line */}
                 {idx !== 0 && (
                   <div className='absolute left-0 top-4 -translate-y-1/2 w-1/2 h-0.5 z-0 pr-2.5'>
@@ -105,7 +109,7 @@ const StepperController: FC<StepperControllerProps> = ({
         {/* Step info */}
         <div>
           <span className='block text-gray-700 text-lg font-semibold'>{ currentStep.label }</span>
-          { !!currentStep.description && <span className='block size-sm'>{ currentStep.description }</span> }
+          { !!currentStep.description && <span className='block size-sm text-gray-600 '>{ currentStep.description }</span> }
         </div>
         {/* Stepper Buttons */}
         <div className='flex gap-4 justify-end'>

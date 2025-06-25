@@ -16,6 +16,10 @@ body {
   }
 }
 
+html {
+  overflow-y: scroll;
+}
+
 h1 {
   @apply text-3xl text-gray-900 font-semibold leading-11;
 }

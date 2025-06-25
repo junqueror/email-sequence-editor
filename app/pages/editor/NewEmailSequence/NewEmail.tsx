@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import React, { lazy, Suspense, useState } from 'react';
 import type { FC } from 'react';
 import Divider from '~/components/layout/Divider';
-import Mail from '~/assets/icons/Mail.svg?react';
+import MailIcon from '~/assets/icons/Mail.svg?react';
 
 import type { Email } from '~/types/email';
 import 'easymde/dist/easymde.min.css';
@@ -38,8 +38,8 @@ const NewEmail: FC<NewEmailProps> = ({
   return (
     <div className={ newEmailClassNames }>
       <div className='flex flex-row gap-4 items-center my-4 mx-6'>
-        <div className='border border-gray-200 rounded-md p-2'>
-          <Mail className='size-4' />
+        <div className='border border-gray-200 rounded-md p-3'>
+          <MailIcon className='size-5' />
         </div>
         <span className='font-semibold text-xl text-gray-900'>{ email.title }</span>
       </div>

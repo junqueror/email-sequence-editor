@@ -12,7 +12,7 @@ export const meta = () => [
 const EditorPage = () => (
   <div className="p-8">
     <BreadCrumbs className="mb-4">
-      <SendIcon />
+      <SendIcon className="size-5" />
       <span>Sequence</span>
     </BreadCrumbs>
     <h1>New sequence</h1>

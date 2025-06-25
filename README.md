@@ -20,7 +20,13 @@ Start the development server with HMR:
 npm run dev
 ```
 
-Your application will be available at `http://localhost:3000`.
+Your application will be available at `http://localhost:5173/`.
+
+### Testing
+
+```bash
+npm run test
+```
 
 ## Building for Production
 
@@ -30,7 +36,11 @@ Create a production build:
 npm run build
 ```
 
-## App code structure
+## Deployment (Vercel)
+
+Check deployed version at [email-sequence-editor.vercel.app](https://email-sequence-editor.vercel.app/)
+
+## Code structure
 
 ```
 app/
@@ -58,13 +68,13 @@ app/
 │   ├── api/          # API service implementations
 │
 ├── types/            # TypeScript type definitions (domain). Used across all the app
-tests/
-│   ├── fixtures/     # Fake data for testing
-│   ├── mocks/        # Fake logic for testing
-│   ├── app/          # Same strcuture as app folder for test files
 │
+tests/
+│
+├── fixtures/     # Fake data for testing
+├── mocks/        # Fake logic for testing
+├── app/          # Same strcuture as app folder for test files
+│
+...config files
+
 ```
-
-## Deployment
-
-[email-sequence-editor.vercel.app](https://email-sequence-editor.vercel.app/)

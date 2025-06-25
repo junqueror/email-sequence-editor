@@ -1,15 +1,15 @@
-import React, { useCallback } from 'react';
-import type { FC } from 'react';
-import StepperController from './StepperController';
-import type { Step } from './StepperController';
-import clsx from 'clsx';
-import Divider from '../Divider';
+import React, { useCallback } from "react";
+import type { FC } from "react";
+import StepperController from "./StepperController";
+import type { Step } from "./StepperController";
+import clsx from "clsx";
+import Divider from "../Divider";
 
 interface StepperProps {
-  step: number,
+  step: number;
   steps: Step[];
-  onStepChange: (step: number) => void,
-  className?: string,
+  onStepChange: (step: number) => void;
+  className?: string;
 }
 
 // NOTE: The logic and responsibilities for managing the steps are best separated from the email sequence editor.
@@ -21,29 +21,28 @@ const Stepper: FC<StepperProps> = ({
   step,
   steps,
   onStepChange,
-  className = '',
+  className = "",
 }) => {
   const maxSteps = steps.length;
 
-  const handleStepChange = useCallback((newStep: number) => {
-    onStepChange(Math.max(0, Math.min(newStep, maxSteps - 1)));
-  }, [maxSteps]);
+  const handleStepChange = useCallback(
+    (newStep: number) => {
+      onStepChange(Math.max(0, Math.min(newStep, maxSteps - 1)));
+    },
+    [maxSteps],
+  );
 
   const stepperClassNames = clsx("w-full", className);
 
   return (
-    <div
-      className={ stepperClassNames }
-    >
+    <div className={stepperClassNames}>
       <StepperController
-        step={ step } 
-        onStepChange= { handleStepChange }
-        steps={ steps }
+        step={step}
+        onStepChange={handleStepChange}
+        steps={steps}
       />
       <Divider />
-      <div className='w-full my-4'>
-        { steps[step].node }
-      </div>
+      <div className="w-full my-4">{steps[step].node}</div>
     </div>
   );
 };

@@ -2,11 +2,11 @@ import React from "react";
 import siteConfig from "../../config/site";
 import NewEmailSequence from "~/pages/editor/NewEmailSequence";
 import BreadCrumbs from "~/components/layout/BreadCrumbs";
-import SendIcon from '~/assets/icons/Send.svg?react';
+import SendIcon from "~/assets/icons/Send.svg?react";
 
 export const meta = () => [
-    { title: `Editor | ${siteConfig.TITLE}` },
-    { name: "description", content: siteConfig.DESCRIPTION },
+  { title: `Editor | ${siteConfig.TITLE}` },
+  { name: "description", content: siteConfig.DESCRIPTION },
 ];
 
 const EditorPage = () => (
@@ -16,7 +16,7 @@ const EditorPage = () => (
       <span>Sequence</span>
     </BreadCrumbs>
     <h1>New sequence</h1>
-    <NewEmailSequence className="my-8"/>
+    <NewEmailSequence className="my-8" />
   </div>
 );
 

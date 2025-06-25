@@ -8,7 +8,7 @@ import clsx from "clsx";
 interface NewEmailSequenceEditStepProps {
   emails?: Email[];
   openEmailId?: Email["id"];
-  onClickEmail: (id: Email["id"]) => void;
+  onClickEmail?: (id: Email["id"]) => void;
   onAddNewEmail?: () => void;
   onEditEmail?: ({
     id,

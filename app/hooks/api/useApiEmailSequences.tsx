@@ -19,6 +19,7 @@ const useApiEmailSequences = (
   const { data, isLoading, isError } = useQuery({
     queryKey: [apiConfig.ENPOINTS.EMAIL_SEQUENCES],
     queryFn: emailSequenceApiService.getEmailSquences,
+    enabled: false, // We don't need it now, jsut added for demo purposes
   });
 
   // Create new email sequences (POST)

@@ -3,7 +3,7 @@ import type { EmailSequence } from "~/types/email";
 
 // Service for peforming API operations related with email sequences
 class EmailSequenceApiService {
-  getEmailSquences = async () => {
+  getEmailSquences = async (): Promise<EmailSequence> => {
     const response = await fetch(apiConfig.ENPOINTS.EMAIL_SEQUENCES, {
       method: "GET",
       headers: {
@@ -15,10 +15,14 @@ class EmailSequenceApiService {
       throw Error("Error retrieving email sequences");
     }
 
-    return response.json();
+    const result = await response.json();
+
+    return result as EmailSequence;
   };
 
-  createEmailSequence = async (emailSequence: EmailSequence) => {
+  createEmailSequence = async (
+    emailSequence: EmailSequence,
+  ): Promise<EmailSequence> => {
     const response = await fetch(apiConfig.ENPOINTS.EMAIL_SEQUENCES, {
       method: "POST",
       headers: {
@@ -33,10 +37,12 @@ class EmailSequenceApiService {
 
       // Mock response when failing for testing purposes
       // TODO: Add error again and remove mock
-      return emailSequence;
+      return emailSequence as EmailSequence;
     }
 
-    return response.json();
+    const result = await response.json();
+
+    return result as EmailSequence;
   };
 }
 

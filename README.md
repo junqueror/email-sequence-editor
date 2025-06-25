@@ -58,6 +58,10 @@ app/
 │   ├── api/          # API service implementations
 │
 ├── types/            # TypeScript type definitions (domain). Used across all the app
+tests/
+│   ├── fixtures/     # Fake data for testing
+│   ├── mocks/        # Fake logic for testing
+│   ├── app/          # Same strcuture as app folder for test files
 │
 ```
 

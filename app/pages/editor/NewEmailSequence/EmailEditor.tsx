@@ -9,7 +9,7 @@ import "easymde/dist/easymde.min.css";
 
 const SimpleMDEEditor = lazy(() => import("react-simplemde-editor"));
 
-interface NewEmailProps {
+interface EmailEditorProps {
   email: Email;
   className?: string;
   isOpen?: boolean;
@@ -25,7 +25,7 @@ interface NewEmailProps {
   }) => void;
 }
 
-const NewEmail: FC<NewEmailProps> = ({
+const EmailEditor: FC<EmailEditorProps> = ({
   email,
   className = "",
   isOpen = false,
@@ -78,8 +78,8 @@ const NewEmail: FC<NewEmailProps> = ({
           <Divider />
           <div className="mx-2 my-1">
             <Suspense fallback={null}>
-              {/* NOTE: This MD editor does not work well, it has some focus related problems 
-                  I decided to open/close mails to have only one MD editor present at a time 
+              {/* NOTE: This MD editor doesn't work very well, it has some problems related with focus and max height
+                  I decided to open/close mails to have only one MD editor present at a time to solve the focus problem
                   TODO: When there is more time, I would look for a more consistent replacement from another library 
               */}
               <SimpleMDEEditor
@@ -116,6 +116,6 @@ const NewEmail: FC<NewEmailProps> = ({
   );
 };
 
-export default NewEmail;
+export default EmailEditor;
 
-export type { NewEmailProps };
+export type { EmailEditorProps };

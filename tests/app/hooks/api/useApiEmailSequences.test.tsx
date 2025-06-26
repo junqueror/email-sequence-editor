@@ -39,8 +39,8 @@ describe("useApiEmailSequences hook", () => {
 
     // Assertions
     await waitFor(() => {
-      expect(successCallbackSpy).toHaveBeenCalled();
       expect(apiServiceSpy).toHaveBeenCalled();
+      expect(successCallbackSpy).toHaveBeenCalled();
     });
   });
 
@@ -71,8 +71,8 @@ describe("useApiEmailSequences hook", () => {
 
     // Assertions
     await waitFor(() => {
-      expect(errorCallbackSpy).toHaveBeenCalled();
       expect(apiServiceSpy).toHaveBeenCalled();
+      expect(errorCallbackSpy).toHaveBeenCalled();
     });
   });
 

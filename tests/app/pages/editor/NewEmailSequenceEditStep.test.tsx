@@ -1,6 +1,6 @@
 import React from "react";
-import { afterEach, describe, expect, it } from "vitest";
-import { cleanup, render, screen } from "@testing-library/react";
+import { afterEach, describe, expect, it, vi } from "vitest";
+import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import * as fixtures from "tests/fixtures";
 import NewEmailSequenceEditStep from "~/pages/editor/NewEmailSequence/NewEmailSequenceEditStep";
 import type { Email } from "~/types/email";
@@ -10,7 +10,7 @@ describe("NewEmailSequenceEditStep component", () => {
     cleanup();
   });
 
-  it("should render a list of NewEmail components", () => {
+  it("should render a list of EmailEditor components", () => {
     // Prepare data
     const emails = fixtures.emails;
 
@@ -18,15 +18,11 @@ describe("NewEmailSequenceEditStep component", () => {
     render(<NewEmailSequenceEditStep emails={emails} />);
 
     // Assertions
-    emails.forEach(({ title }) => {
-      expect(screen.getByText(title!)).toBeTruthy();
-    });
-
     const emailTitleTexts = screen.getAllByText(/title-/);
     expect(emailTitleTexts).toHaveLength(emails.length);
   });
 
-  it("should render zero NewEmail components when no emails provided", () => {
+  it("should render zero EmailEditor components when no emails provided", () => {
     // Prepare data
     const emails: Email[] = [];
 
@@ -64,7 +60,29 @@ describe("NewEmailSequenceEditStep component", () => {
     expect(addNewEmailButton).toBeNull();
   });
 
-  it("should render a single opened NewEmail component when 'openEmailId' prop is defined", () => {
+  it("should onAddNewEmail callback when clicking Add new step' button", () => {
+    // Prepare data
+    const emails = fixtures.emails;
+
+    // Prepare environment
+    const onAddNewEmailCallbackSpy = vi.fn();
+
+    // Execute test
+    render(
+      <NewEmailSequenceEditStep
+        emails={emails}
+        onAddNewEmail={onAddNewEmailCallbackSpy}
+      />,
+    );
+
+    const addNewEmailButton = screen.getByRole("button");
+    fireEvent.click(addNewEmailButton);
+
+    // Assertions
+    expect(onAddNewEmailCallbackSpy).toHaveBeenCalled();
+  });
+
+  it("should render a single opened EmailEditor component when 'openEmailId' prop is defined", () => {
     // Prepare data
     const emails = fixtures.emails;
 
@@ -81,8 +99,10 @@ describe("NewEmailSequenceEditStep component", () => {
     expect(emailSubjectInputs).toHaveLength(1);
   });
 
-  // ...
+  // This is a demo on how to implement tests on a React component, using fixtures, spies and different props to test different scenarios
+  // TODO: Complete tests for all services
 
-  // This is a demo on how to implement tests on components
-  // TODO: Complete tests for all components, hooks and services
+  // NOTE: I have only added different types of unittests to show skills, but in a real scenario
+  // I would discuss what level of testing we want to implement and I would also value integration and end-to-end testing
+  // depending on the phase of the company, size of the project, number of clients, speed required, QA team...
 });

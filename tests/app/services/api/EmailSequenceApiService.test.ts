@@ -1,5 +1,4 @@
 import { afterEach, describe, it, expect, beforeAll, afterAll } from "vitest";
-import { cleanup } from "@testing-library/react";
 import { emailSequenceApiService } from "~/services/api/EmailSequenceApiService";
 import { emailSequence } from "tests/fixtures";
 import { mockApiServer } from "tests/mocks/api";
@@ -7,7 +6,6 @@ import { mockApiServer } from "tests/mocks/api";
 beforeAll(() => mockApiServer.listen());
 
 afterEach(() => {
-  cleanup();
   mockApiServer.resetHandlers();
 });
 
@@ -27,6 +25,10 @@ describe("EmailSequenceApiService service", () => {
 
   // ...
 
-  // This is a demo on how to implement tests on custom hooks
-  // TODO: Complete tests for all components, hooks and services
+  // This is a demo on how to implement tests on logic, mocking API requests with MSW
+  // TODO: Complete tests for all services
+
+  // NOTE: I have only added different types of unittests to show skills, but in a real scenario
+  // I would discuss what level of testing we want to implement and I would also value integration and end-to-end testing
+  // depending on the phase of the company, size of the project, number of clients, speed required, QA team...
 });

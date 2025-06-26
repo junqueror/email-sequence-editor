@@ -1,7 +1,7 @@
 import React from "react";
 import type { FC } from "react";
 import type { Email } from "~/types/email";
-import NewEmail from "./NewEmail";
+import EmailEditor from "./EmailEditor";
 import Button from "~/components/elements/Button";
 import clsx from "clsx";
 
@@ -36,7 +36,7 @@ const NewEmailSequenceEditStep: FC<NewEmailSequenceEditStepProps> = ({
     <div className={newEmailSequenceEditStepClassNames}>
       <div className="flex flex-col gap-4">
         {emails.map((email) => (
-          <NewEmail
+          <EmailEditor
             key={email.title}
             email={email}
             isOpen={openEmailId === email.id}

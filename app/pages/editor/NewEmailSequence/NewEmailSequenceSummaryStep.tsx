@@ -41,6 +41,7 @@ const NewEmailSequenceSummaryStep: FC<NewEmailSequenceSummaryStepProps> = ({
     </div>
     <div className="w-full flex justify-end mt-4">
       {!!onSave && (
+        // TODO: Add emails validation on client side before allowing the user to save
         <Button isAccent isDisabled={!emails.length} onClick={onSave}>
           Save
         </Button>

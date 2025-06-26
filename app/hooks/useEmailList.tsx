@@ -39,7 +39,7 @@ const emailReducer = (state: Email[], action: Action): Email[] => {
       return state.filter((email) => email.id !== action.payload.id);
 
     case ActionTypes.SET_EMAILS:
-      return [];
+      return action.payload as Email[];
 
     default:
       return state;

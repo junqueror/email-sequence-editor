@@ -31,16 +31,19 @@ const NewEmailSequence: FC<NewEmailSequenceProps> = ({ className = "" }) => {
     INITIAL_EMAIL.id,
   );
 
+  const resetEmailList = () => {
+    // Clean email sequence, add initial email, return to editor step
+    setEmails([INITIAL_EMAIL]);
+    setOpenEmailId(INITIAL_EMAIL.id);
+    setStep(INITIAL_STEP);
+  };
+
   const { emails, addEmail, editEmail, setEmails } = useEmailList([
     INITIAL_EMAIL,
   ]);
   const { createEmailSequence } = useApiEmailSequences({
     // TODO: Update response/error handling to give user feedback with toast notifications or similar
-    onCreateSuccess: () => {
-      // Clean email sequence and return to editor step
-      setEmails([INITIAL_EMAIL]);
-      setStep(INITIAL_STEP);
-    },
+    onCreateSuccess: resetEmailList,
     onCreateError: console.error,
   });
 

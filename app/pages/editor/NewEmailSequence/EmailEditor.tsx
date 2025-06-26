@@ -1,13 +1,13 @@
 import clsx from "clsx";
-import React, { lazy, Suspense, useState } from "react";
+import React, { lazy, Suspense } from "react";
 import type { FC } from "react";
 import Divider from "~/components/layout/Divider";
 import MailIcon from "~/assets/icons/Mail.svg?react";
 
 import type { Email } from "~/types/email";
-import "easymde/dist/easymde.min.css";
+import "react-quill-new/dist/quill.snow.css";
 
-const SimpleMDEEditor = lazy(() => import("react-simplemde-editor"));
+const ReactQuill = lazy(() => import("react-quill-new"));
 
 interface EmailEditorProps {
   email: Email;
@@ -32,18 +32,14 @@ const EmailEditor: FC<EmailEditorProps> = ({
   onClick = undefined,
   onEditEmail = undefined,
 }) => {
-  const [smdeAutofocus, setSmdeAutofocus] = useState(false);
-
   const handleClick = () => onClick?.(email.id);
 
   const editSubject = (event: React.ChangeEvent<HTMLInputElement>) => {
     onEditEmail?.({ id: email.id, subject: event?.target?.value });
-    setSmdeAutofocus(false);
   };
 
   const editContent = (value: string) => {
     onEditEmail?.({ id: email.id, content: value });
-    setSmdeAutofocus(true);
   };
 
   const newEmailClassNames = clsx(
@@ -78,35 +74,30 @@ const EmailEditor: FC<EmailEditorProps> = ({
           <Divider />
           <div className="mx-2 my-1">
             <Suspense fallback={null}>
-              {/* NOTE: This MD editor doesn't work very well, it has some problems related with focus and max height
-                  I decided to open/close mails to have only one MD editor present at a time to solve the focus problem
-                  TODO: When there is more time, I would look for a more consistent replacement from another library 
-              */}
-              <SimpleMDEEditor
+              {/* NOTE: Using an external library for content editor is the best choice. I've implemented styles as close as possible to design */}
+              <ReactQuill
                 className={clsx(
-                  "[&>.EasyMDEContainer]:!border-0", // wrapper
-                  "[&>.EasyMDEContainer>.CodeMirror]:!border-0", // CodeMirror // FIXME: CodeMirror from SimpleMDEEditor doesn't allow to remove min height => Change by another Markdown editor?
-                  "[&>.EasyMDEContainer>.editor-preview-side]:!hidden", // preview
-                  "[&>.EasyMDEContainer>.editor-toolbar]:!border-0 [&>.EasyMDEContainer>.editor-toolbar_i]:text-gray-400 [&>.EasyMDEContainer>.editor-toolbar_button:after]:text-gray-400", // toolbar
-                  "[&>.EasyMDEContainer>.editor-statusbar]:hidden", // statusbar
+                  "[&>.ql-toolbar.ql-snow]:!border-0", // toolbar
+                  "[&>.ql-toolbar.ql-snow_svg_*]:!stroke-gray-400", // toolbar-heading
+                  "[&>.ql-toolbar.ql-snow_.ql-picker-label]:!text-gray-400", // toolbar-icons
+                  "[&>.ql-container.ql-snow]:!border-0 [&>.ql-container.ql-snow]:min-h-[200px]", // container
+                  "[&>.ql-container.ql-snow>.ql-editor]:min-h-[200px]", // editor
                 )}
-                value={email.content}
-                onChange={editContent}
-                options={{
-                  autofocus: smdeAutofocus,
-                  spellChecker: false,
+                theme="snow"
+                modules={{
                   toolbar: [
                     "bold",
                     "italic",
-                    "heading-bigger",
-                    "heading-smaller",
-                    "quote",
+                    { header: [1, 2, true] },
+                    "blockquote",
                     "link",
                     "image",
-                    "unordered-list",
-                    "ordered-list",
+                    { list: "bullet" },
+                    { list: "ordered" },
                   ],
                 }}
+                value={email.content}
+                onChange={editContent}
               />
             </Suspense>
           </div>

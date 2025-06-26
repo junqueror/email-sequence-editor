@@ -2,6 +2,7 @@ import React from "react";
 import type { FC } from "react";
 import Button from "~/components/elements/Button";
 import type { Email } from "~/types/email";
+import EmailSummary from "./EmailSummary";
 
 interface NewEmailSequenceSummaryStepProps {
   emails?: Email[];
@@ -23,19 +24,7 @@ const NewEmailSequenceSummaryStep: FC<NewEmailSequenceSummaryStepProps> = ({
       </div>
       <div className="flex flex-col gap-8">
         {emails.map((email) => (
-          <div key={email.subject}>
-            <div className="text-gray-700 font-semibold">
-              <span>{email.title}</span>
-            </div>
-            <div>
-              <span>Subject: </span>
-              <span>{email.subject || "-"}</span>
-            </div>
-            <div className="flex flex-row items-start mt-4 gap-1">
-              <span>Content:</span>
-              <p className="whitespace-pre-wrap">{email.content || "-"}</p>
-            </div>
-          </div>
+          <EmailSummary key={email.id} email={email} />
         ))}
       </div>
     </div>
